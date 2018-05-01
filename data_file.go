@@ -64,11 +64,11 @@ func NewDataFileReader(filename string, datumReader DatumReader) (*DataFileReade
 		return nil, err
 	}
 
-	return newDataFileReaderBytes(buf, datumReader)
+	return NewDataFileReaderBytes(buf, datumReader)
 }
 
 // separated out mainly for testing currently, will be refactored later for io.Reader paradigm
-func newDataFileReaderBytes(buf []byte, datumReader DatumReader) (reader *DataFileReader, err error) {
+func NewDataFileReaderBytes(buf []byte, datumReader DatumReader) (reader *DataFileReader, err error) {
 	if len(buf) < len(magic) || !bytes.Equal(magic, buf[0:4]) {
 		return nil, NotAvroFile
 	}
